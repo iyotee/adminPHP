@@ -77,8 +77,8 @@
                 $mail->isSMTP();
                 $mail->Host = 'mail.infomaniak.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contact@helpmenow.ch';
-                $mail->Password = 'helpmenow-T00rT00r';
+                $mail->Username = 'YOUR EMAIL';
+                $mail->Password = 'YOUR PASSWORD';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
