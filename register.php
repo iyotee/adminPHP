@@ -75,7 +75,7 @@
 
                 try {
                 $mail->isSMTP();
-                $mail->Host = 'mail.infomaniak.com';
+                $mail->Host = 'YOUR MAILING HOST';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'YOUR EMAIL';
                 $mail->Password = 'YOUR PASSWORD';
