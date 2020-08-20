@@ -17,19 +17,46 @@
         }
     }
     if(!empty($_POST) && isset($_POST['btn_sendMofifyUsernameForm'])){
+
+        require_once 'inc/db.php'; 
         
         if(empty($_POST['username'])){
             $_SESSION['flash']['danger'] = "L'utilisateur ne peux pas être vide";
-        }else{
-            $user_id = $_SESSION['auth']->id;
-            $username = $_POST['username'];
-            require_once 'inc/db.php'; 
-            $q = $pdo->prepare('UPDATE users SET username = ? WHERE id = ?');
-            $q->execute(array($username, $user_id));
-            $_SESSION['auth']->username = $username;
-            $_SESSION['flash']['success'] = "Votre username à bien été mis à jour";
+        }
+        else{
+            if(!preg_match('/^[a-z\d_]{2,20}$/i',$_POST['username'])){
+                $_SESSION['flash']['danger'] = "Votre username n'est pas valide (alphanumérique)";
+            }
+            else{
+                $q = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+                $q->execute(array($_POST['username']));
+                $userInfos = $q->fetch();
+
+                if($userInfos->username){
+                    if($userInfos->username == $_POST['username'] && $userInfos->id == $_SESSION['auth']->id){
+                        $_SESSION['flash']['danger'] = "Le username est le même que celui déjà enregistré dans notre base de données";
+                    }elseif($userInfos->username == $_POST['username']){
+                        $_SESSION['flash']['danger'] = "Le username est déjà prit";
+
+                    }
+                }
+                else{
+                    $user_id = $_SESSION['auth']->id;
+                    $username = $_POST['username'];
+                    $q = $pdo->prepare('UPDATE users SET username = ? WHERE id = ?');
+                    $q->execute(array($username, $user_id));
+                    $_SESSION['auth']->username = $username;
+                    $_SESSION['flash']['success'] = "Votre username à bien été mis à jour";
+                }
+            }
         }
     }
+                
+
+
+
+
+
     require 'inc/header.php'; 
 ?>
 
