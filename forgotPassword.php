@@ -48,7 +48,7 @@
                 $mail->Port = 587;
 
                 // Email d'envoie
-                $mail->setFrom('contact@helpmenow.ch');
+                $mail->setFrom('YOUR SENT EMAIL NAME (SHOWN ON THE MAIL)');
                 // Email de récéption
                 $mail->addAddress($_POST['email']);
 
