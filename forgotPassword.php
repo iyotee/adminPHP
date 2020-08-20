@@ -40,10 +40,10 @@
 
                 try {
                 $mail->isSMTP();
-                $mail->Host = 'mail.infomaniak.com';
+                $mail->Host = 'YOUR MAILING HOST';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contact@helpmenow.ch';
-                $mail->Password = 'helpmenow-T00rT00r';
+                $mail->Username = 'YOURMAIL';
+                $mail->Password = 'YOURPASSWORD';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
